@@ -1,0 +1,78 @@
+{% load static %}
+
+<nav class="bg-slate-300 border-gray-200">
+	<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
+		<div class="md:w-1/5">
+			{% comment %} Index Link {% endcomment %}
+			<a href="{% url "index" %}" class="flex items-center space-x-3" data-action="fetch">
+				<img src="{% static 'icons/favicon.ico' %}" class="h-8" alt="Site Logo" />
+				<p class="text-xl font-semibold font-sans">XO Manga</p>
+			</a>
+		</div>
+
+		{% comment %} Search MD {% endcomment %}
+		{% if not index %}
+		<div class="hidden md:flex mx-auto">
+			<form action="{% url 'search'  %}">
+				<div class="hidden md:flex space-x-2 mx-auto">
+					<input type="text" id="search-navbar" name="query"
+						class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+						placeholder="Search..." required>
+					<button data-action="fetch">
+						<svg class="h-5 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+							viewBox="0 0 20 20">
+							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+								d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+						</svg>
+					</button>
+				</div>
+			</form>
+		</div>
+		{% endif %}
+
+		{% comment %} Navbar Actions {% endcomment %}
+		<div id="navbar-buttons" class="flex space-x-0.5 md:order-1">
+			{% comment %} Search Button {% endcomment %}
+			<button type="button" data-toggle-type="navbar-search" aria-controls="navbar-search" aria-expanded="false"
+				class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200">
+				<svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+					viewBox="0 0 20 20">
+					<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+						d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+				</svg>
+				<span class="sr-only">Search</span>
+			</button>
+
+			{% comment %} Clear Button {% endcomment %}
+			<a href="{% url "clear" %}" data-action="fetch"
+				class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0"><svg
+					xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+					<path
+						d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v.75c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875v-.75C22.5 3.839 21.66 3 20.625 3H3.375Z" />
+					<path fill-rule="evenodd"
+						d="m3.087 9 .54 9.176A3 3 0 0 0 6.62 21h10.757a3 3 0 0 0 2.995-2.824L20.913 9H3.087ZM12 10.5a.75.75 0 0 1 .75.75v4.94l1.72-1.72a.75.75 0 1 1 1.06 1.06l-3 3a.75.75 0 0 1-1.06 0l-3-3a.75.75 0 1 1 1.06-1.06l1.72 1.72v-4.94a.75.75 0 0 1 .75-.75Z"
+						clip-rule="evenodd" />
+				</svg>
+			</a>
+
+		</div>
+
+		{% comment %} Search SM {% endcomment %}
+		<div class="items-center md:w-1/5 justify-between hidden w-full md:flex" id="navbar-search">
+			<form action="{% url 'search'  %}">
+				<div class="flex mt-3 md:hidden space-x-2 w-10/12 mx-auto">
+					<input type="text" id="search-navbar" name="query"
+						class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+						placeholder="Search...">
+					<button data-action="fetch">
+						<svg class="h-5 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+							viewBox="0 0 20 20">
+							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+								d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+						</svg>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</nav>

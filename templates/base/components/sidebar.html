@@ -1,0 +1,112 @@
+{% load utils %}
+
+
+<div id="sidebar"
+	class="invisible fixed space-y-8 w-16 flex justify-around flex-col top-1/2 opacity-10 hover:opacity-100 lg:opacity-100 transform -translate-y-1/2 rounded-xl bg-slate-200 pt-2 pb-3">
+	{% comment %} Pages {% endcomment %}
+	<div class="h-[420px] grid gap-2 p-2 scrollbar scrollbar-none overflow-y-scroll">
+		{% for page in request.get_pages %}
+		<a href="#img-{{request.get_chapter.id}}-page{{page.page}}"
+			class="border-2 hover:bg-[#082E35] hover:text-white font-semibold text-[#082E35] border-[#082E35] rounded-xl gap-2 p-2 w-12 mx-auto text-center">{{page.page}}</a>
+		{% endfor %}
+	</div>
+
+	{% comment %} Chapters {% endcomment %}
+	<div id="chapters"
+		class="invisible rounded-xl items-center fixed bg-slate-200 mx-auto left-20 w-56 xxs:w-80 flex flex-col justify-evenly space-y-3 top-1/2 transform -translate-y-1/2 min-h-[80px] h-[360px] p-2 border-slate-800 border-2 shadow-lg">
+		<div class="">
+			<input type="text" id="searchInput" placeholder="Chapter Number"
+				class="p-2 mt-3 text-center border-slate-800 border-2 shadow-lg rounded-xl">
+		</div>
+		<div class="scrollbar scrollbar-none grid grid-cols-4 xs:grid-cols-5 gap-2 md:gap-3 lg:gap-4 p-2 overflow-y-auto w-full rounded-xl"
+			id="chapter-scrollbar">
+			{% for chapter in request.get_chapters %}
+			<a id="{{chapter.id}}" data-type="link" href="{% url 'read' %}?id={{chapter.id}}" data-action="fetch"
+				class="border rounded-xl gap-3 p-2 text-center whitespace-nowrap  {% if request.get_now_reading == chapter.id %}bg-gray-800 text-gray-100{% endif %} border-[#082E35]"
+				title="Chapter {{chapter.id|last_part}}">{{chapter.id|last_part}}</a>
+			{% endfor %}
+		</div>
+	</div>
+
+	{% comment %} Actions {% endcomment %}
+	<div class="flex flex-col items-center mx-auto space-y-8">
+		{% comment %} Select Chapter {% endcomment %}
+		<div class="grid">
+			{% comment %} Chapters {% endcomment %}
+			{% if request.get_chapters %}
+			<button id="toggle-chapters" title="Select Chapter"
+				class="border-2 border-[#082E35] rounded-xl mx-auto w-12 p-2 hover:bg-[#082E35] hover:text-white">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentcolor" class="w-6 h-6 mx-auto">
+					<path
+						d="M18.75 12.75h1.5a.75.75 0 0 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5ZM12 6a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 12 6ZM12 18a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 12 18ZM3.75 6.75h1.5a.75.75 0 1 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5ZM5.25 18.75h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5ZM3 12a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 3 12ZM9 3.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM12.75 12a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0ZM9 15.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" />
+				</svg>
+			</button>
+			{% endif %}
+		</div>
+
+		{% comment %} Previous / Next {% endcomment %}
+		<div class="grid space-y-3">
+			{% comment %} Previous {% endcomment %}
+			{% if request.get_previous %}
+			<a href="{% url 'read' %}?id={{request.get_previous.id}}" data-action="fetch"
+				class="border-2 border-[#082E35] rounded-xl mx-auto w-12 p-2 hover:bg-[#082E35] hover:text-white"
+				title="Chapter {{request.get_previous.id|last_part}}">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentcolor" class="w-6 h-6 mx-auto">
+					<path
+						d="M9.195 18.44c1.25.714 2.805-.189 2.805-1.629v-2.34l6.945 3.968c1.25.715 2.805-.188 2.805-1.628V8.69c0-1.44-1.555-2.343-2.805-1.628L12 11.029v-2.34c0-1.44-1.555-2.343-2.805-1.628l-7.108 4.061c-1.26.72-1.26 2.536 0 3.256l7.108 4.061Z" />
+				</svg>
+			</a>
+			{% endif %}
+
+			{% comment %} Next {% endcomment %}
+			{% if request.get_next %}
+			<a href="{% url 'read' %}?id={{request.get_next.id}}" data-action="fetch"
+				class="border-2 border-[#082E35] rounded-xl mx-auto w-12 p-2 hover:bg-[#082E35] hover:text-white"
+				title="Chapter {{request.get_next.id|last_part}}">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentcolor" class="w-6 h-6 mx-auto">
+					<path
+						d="M5.055 7.06C3.805 6.347 2.25 7.25 2.25 8.69v8.122c0 1.44 1.555 2.343 2.805 1.628L12 14.471v2.34c0 1.44 1.555 2.343 2.805 1.628l7.108-4.061c1.26-.72 1.26-2.536 0-3.256l-7.108-4.061C13.555 6.346 12 7.249 12 8.689v2.34L5.055 7.061Z" />
+				</svg>
+			</a>
+			{% endif %}
+		</div>
+
+		<div class="grid space-y-3">
+			{% comment %} Change Mode {% endcomment %}
+			<buttton id="modeChange"
+				class="border-2 border-[#082E35] rounded-xl mx-auto w-12 p-2 hover:bg-[#082E35] hover:text-white"
+				title="Shrink">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+					stroke="currentColor" class="w-6 h-6 mx-auto">
+					<path stroke-linecap="round" stroke-linejoin="round"
+						d="M9 9V4.5M9 9H4.5M9 9 3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5 5.25 5.25" />
+				</svg>
+			</buttton>
+
+			{% comment %} Change Width {% endcomment %}
+			<buttton id="widthChange"
+				class="border-2 border-[#082E35] rounded-xl mx-auto w-12 p-2 hover:bg-[#082E35] hover:text-white"
+				title="1:1">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+					stroke="currentColor" class="w-6 h-6 mx-auto">
+					<path stroke-linecap="round" stroke-linejoin="round"
+						d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+				</svg>
+
+			</buttton>
+
+			{% comment %} Details {% endcomment %}
+			{% if request.get_id %}
+			<a href="{% url 'details' %}?id={{request.get_id}}" data-action="fetch"
+				class="border-2 border-[#082E35] rounded-xl mx-auto w-12 p-2 hover:bg-[#082E35] hover:text-white"
+				title="Details">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentcolor" class="w-6 h-6 mx-auto">
+					<path fill-rule="evenodd"
+						d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 0 1 .67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 1 1-.671-1.34l.041-.022ZM12 9a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+						clip-rule="evenodd" />
+				</svg>
+			</a>
+			{% endif %}
+		</div>
+	</div>
+</div>

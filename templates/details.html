@@ -1,0 +1,78 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+{% if request.get_id %}{{request.get_details.title}}{% endif %}
+{% endblock title %}
+
+{% block content %}
+
+<div class="mx-auto space-y-4">
+	{% comment %} Title {% endcomment %}
+	{% if request.get_details.title %}
+	<div class="mx-auto text-center text-xl p-2">
+		<p class="py-3 text-2xl translate-y-1 font-bold">{{request.get_details.title}}</p>
+	</div>
+	{% endif %}
+
+	<div class="container flex flex-col md:flex-row justify-around mx-auto md:h-[720px]">
+
+		{% comment %} Image {% endcomment %}
+		{% if request.get_details.image %}
+		<div class="md:w-2/5 items-center my-auto">
+			<img src="{{request.get_details.image}}" data-type="image" alt="image#{{request.get_id}}"
+				class="w-[240px] h-[320px] md:w-[380px] md:h-[420px] lg:h-[480px] rounded-xl mx-auto object-contain">
+		</div>
+		{% endif %}
+
+		<div class="flex flex-col justify-center space-y-2 md:w-2/5">
+
+			{% comment %} Alt Titles {% endcomment %}
+			{% if request.get_details.altTitles > 2 %}
+			<p class="p-2 font-semibold mx-auto">
+				{% for chapter in request.get_details.altTitles %}
+				{% if forloop.last %}{{chapter}}.
+				{% else %}
+				{{chapter}},
+				{% endif %}
+				{% endfor %}
+			</p>
+			{% endif %}
+
+			{% comment %} Description {% endcomment %}
+			{% if request.get_details.description %}
+			<div class="p-2 w-10/12 md:w-full mx-auto">
+				<p class="text-justify leading-5 line-clamp-5 hover:line-clamp-none p-2">
+					{{request.get_details.description|safe}}
+				</p>
+			</div>
+			{% endif %}
+
+			{% comment %} Chapters {% endcomment %}
+			{% if request.get_chapters %}
+			<div class="flex p-2 mx-auto">
+				<p class="text-justify">Chapters : {{request.get_chapters|length}}</p>
+			</div>
+			{% endif %}
+
+			{% comment %} Genres {% endcomment %}
+			{% if request.get_details.genres %}
+			<div class="p-2 w-10/12 md:w-11/12 mx-auto">
+				<div class="grid grid-cols-2 xl:grid-cols-3 items-center p-2 gap-2">
+					{% for chapter in request.get_details.genres %}
+					<p class="text-center p-2 border rounded-lg w-full md:w-4/5 mx-auto">{{chapter}}</p>
+					{% endfor %}
+				</div>
+			</div>
+			{% endif %}
+
+			{% comment %} Read {% endcomment %}
+			{% if request.get_chapters and request.get_now_reading %}
+			<div class="flex justify-center">
+				<a href="{% url 'read' %}?id={{request.get_now_reading}}" data-action="fetch"
+					class="py-2 px-3 rounded-xl border bg-gray-300 hover:bg-gray-800 hover:text-white">Read</a>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,51 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="XO Manga, A place to read Manga." />
+
+	<title>{% block title %}{% endblock title %}</title>
+
+	<link rel="shortcut icon" href="{% static 'icons/favicon.ico' %}" type="image/x-icon">
+	<link rel="manifest" href="{% static 'manifest.json' %}" />
+	<link rel="stylesheet" href="{% static 'styles/styles.min.css' %}">
+
+</head>
+
+<body class="hidden mb:flex flex-col h-screen">
+	<header>
+		{% include "base/components/navbar.html" %}
+		{% include "base/components/messages.html" %}
+		{% include "base/components/spinner.html" %}
+	</header>
+
+	<main class="bg-slate-100 flex-1">
+		{% block content %}{% endblock content %}
+	</main>
+
+	<footer class="p-3.5 text-slate-700 bg-slate-200 text-lg font-semibold text-center w-full  mx-auto">
+		Akash Damle, 2024
+	</footer>
+
+	{% comment %} Scripts {% endcomment %}
+	<script>
+		const imagePlaceholder = "{% static 'images/placeholder.jpg' %}"
+		const nowReading = "{{request.get_now_reading|safe}}"
+
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker.register("{% static 'scripts/serviceWorker.js' %}")
+		}
+	</script>
+
+	<script src="{% static 'scripts/app.js' %}"></script>
+	{% block scripts %}{% endblock scripts %}
+</body>
+
+
+
+</html>

@@ -1,0 +1,184 @@
+{% extends "base/base.html" %}
+
+{% block title %}XO Manga{% endblock title %}
+
+{% block content %}
+
+{% comment %} Main {% endcomment %}
+<div class="max-w-screen-lg mx-auto p-4 m-4 space-y-5">
+
+	<p class="text-2xl font-semibold text-center p-2">XO Manga - Read Manga Online</p>
+
+	{% comment %} Search {% endcomment %}
+	<div class="mx-auto p-4">
+		<form action="{% url 'search'  %}">
+			<div class="space-x-2 mx-auto flex w-10/12 sm:w-2/3">
+				<input type="text" id="search-navbar" name="query"
+					class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+					placeholder="Search..." required>
+				<button data-action="fetch">
+					<svg class="h-5 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+						viewBox="0 0 20 20">
+						<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+							d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+					</svg>
+				</button>
+			</div>
+		</form>
+	</div>
+
+	{% comment %} Description {% endcomment %}
+	<p class="text-xl font-semibold text-center py-2">What is XO Manga?</p>
+
+	<p class="text-center">
+		XO Manga is an ad-free manga site that allows users to read manga for free.
+		XO Manga gets it's content <a href="https://www.mangasee123.com" class="font-bold">Mangasee</a>.
+	</p>
+
+	<p class="text-justify">
+		Are you looking to read manga online at no cost? Or are you subscribing to a paid reading service already but in
+		hopes of saving up? Or are you feeling unsafe on the current free manga site? If you can relate to any of these
+		questions, you will find the solution here, on XO Manga.
+	</p>
+
+	<p class="text-justify">
+		If you search about Reading manga on Google, one of the first autocomplete predictions is “Why manga is so
+		expensive?”. Yes, not everyone can afford to read their favorite manga online and MangaReader is created to
+		change it. We are here to make sure all manga lovers can have access to their manga of interest. And that is why
+		XO Manga is free and safe.
+	</p>
+
+	<p class="text-xl font-semibold text-center py-2">How To Read Manga online?</p>
+
+	<p class="text-justify">
+		As manga originates from Japan, the easiest way to read it is to know the language. However, as you are here, we
+		assume that Japanese might not be one of the languages you can read proficiently. But don't sweat it, all mangas
+		on XO Manga are in English for your convenience.
+	</p>
+
+	<p class="text-justify">
+		Reading manga can be different from reading a comic, book, or magazine, especially when it is traditional
+		Japanese manga. The main reason for this is that kanji, the Japanese writing, is read right to left. So when you
+		pick up a manga volume to read, you need to start with the frame (a.k.a koma) in the upper right-hand corner and
+		end a page with the koma in the bottom left-hand corner. Most publishers retain the original format of the
+		manga; therefore, it is important to know this first rule.
+	</p>
+
+	<p class="text-xl font-semibold text-center py-2">Where To Read Manga For Free?</p>
+
+	<p class="text-justify">
+		Despite growing demand, manga is not easily available outside of Japan and once they are, they are expensive. It
+		makes total sense as they are copyrighted audiovisual products/translated works. In the US, mangas cost you from
+		8 to 20 USD, sometimes more. Not everyone can afford to pay such a large amount of money for a volume unless
+		their hobby is to collect manga. But as we stated above, XO Manga is created in hopes that every manga fan
+		can get to read manga without paying a dime, this site is completely free of charge. To read manga online for
+		free, all you need to do is to visit XO Manga, search for the manga you want to watch, and enjoy reading it
+		at no cost and with no risk.
+	</p>
+
+	<div class="space-y-2 py-2">
+		<p class="text-xl font-semibold text-center py-2">Features</p>
+		<ul>
+			<li class="flex space-x-3">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+					stroke="currentColor" class="w-6 h-6">
+					<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+				</svg>
+				<p>Free of charge.</p>
+			</li>
+			<li class="flex space-x-3">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+					stroke="currentColor" class="w-6 h-6">
+					<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+				</svg>
+				<p>Safe to use.</p>
+			</li>
+			<li class="flex space-x-3">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+					stroke="currentColor" class="w-6 h-6">
+					<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+				</svg>
+				<p>Various genres and subgenres.</p>
+			</li>
+			<li class="flex space-x-3">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+					stroke="currentColor" class="w-6 h-6">
+					<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+				</svg>
+				<p>Free of charge.</p>
+			</li>
+			<li class="flex space-x-3">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+					stroke="currentColor" class="w-6 h-6">
+					<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+				</svg>
+				<p>High-quality scans.</p>
+			</li>
+			<li class="flex space-x-3">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+					stroke="currentColor" class="w-6 h-6">
+					<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+				</svg>
+				<p>Zero ads and pop-ups.</p>
+			</li>
+			<li class="flex space-x-3">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+					stroke="currentColor" class="w-6 h-6">
+					<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+				</svg>
+				<p>Easy and simple UI & UX.</p>
+			</li>
+			<li class="flex space-x-3">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+					stroke="currentColor" class="w-6 h-6">
+					<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+				</svg>
+				<p>No Limits on Reading Manga.</p>
+			</li>
+			<li class="flex space-x-3">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+					stroke="currentColor" class="w-6 h-6">
+					<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+				</svg>
+				<p>No registration or account needed.</p>
+			</li>
+		</ul>
+	</div>
+
+	<p class="text-xl font-semibold text-center py-2">Is XO Manga Safe To Read Manga Online?</p>
+
+	<p class="text-justify">
+		Reading manga is a time-consuming hobby and it should only be done on a safe and secure
+		site. While most free manga sites are filled with ads and pop-ups, XO Manga is completely ad-free. We are
+		dedicated to bringing you a risk-free reading experience, therefore, no ads, pop-ups, or commercials are
+		existent on the site. With no ad links, hackers have no way to pose a risk to your device and identity. By
+		reading manga on MangaReader, you can avoid the risk of serious headaches such as data loss, identity theft,
+		corrupted networks, etc.
+	</p>
+
+	<p class="text-justify">
+		XO Manga does not require any registration or signup, meaning that users are not obliged to provide their
+		information such as full name, email address, credit card details, etc to have full access to the site’s content
+		library and features. With no information shared, there will be no information leaked, and your identity will
+		also be kept safe. To sum it up, XO Manga is the best and safest manga site that every manga lover should
+		check out.
+	</p>
+</div>
+
+
+{% comment %} Continue Reading {% endcomment %}
+{% if request.get_pages %}
+<div class="fixed bottom-10 p-2.5 bg-yellow-400 rounded-full hover:bg-yellow-700 right-10" title="Continue Reading">
+	<a href="{% url 'read' %}?id={{request.get_now_reading}}" data-action="fetch">
+		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+			class="w-8 h-8">
+			<path stroke-linecap="round" stroke-linejoin="round"
+				d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" />
+			<path stroke-linecap="round" stroke-linejoin="round"
+				d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18Z" />
+		</svg>
+	</a>
+</div>
+{% endif %}
+
+{% endblock content %}
